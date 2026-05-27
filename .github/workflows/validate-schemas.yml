@@ -1,0 +1,112 @@
+name: Validate Schemas
+
+on:
+  push:
+    paths:
+      - ".github/workflows/validate-schemas.yml"
+      - "schemas/**"
+      - "examples/**"
+  pull_request:
+    paths:
+      - ".github/workflows/validate-schemas.yml"
+      - "schemas/**"
+      - "examples/**"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install jsonschema
+
+      - name: Debug file tree
+        run: |
+          pwd
+          find . -maxdepth 4 -type f | sort
+
+      - name: Validate Royalty OS Trace Layer schemas and examples
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from jsonschema import Draft202012Validator, FormatChecker
+
+          validation_sets = [
+              {
+                  "name": "Royalty Trace Event v3.0",
+                  "schema": Path("schemas/royalty-trace-event-v3.0.schema.json"),
+                  "examples": [
+                      Path("examples/trace-event.structural-influence.example.json"),
+                      Path("examples/trace-event.concept-reference.example.json"),
+                      Path("examples/trace-event.direct-quote.example.json"),
+                      Path("examples/trace-event.outlier-origin.example.json"),
+                  ],
+              },
+              {
+                  "name": "Royalty Allocation Trigger v3.0",
+                  "schema": Path("schemas/royalty-allocation-trigger-v3.0.schema.json"),
+                  "examples": [
+                      Path("examples/allocation-trigger.example.json"),
+                  ],
+              },
+          ]
+
+          print("Validating Royalty OS Trace Layer v3.0 files...")
+
+          for validation_set in validation_sets:
+              name = validation_set["name"]
+              schema_path = validation_set["schema"]
+              example_paths = validation_set["examples"]
+
+              print(f"\n=== Validating {name} ===")
+
+              if not schema_path.exists():
+                  raise FileNotFoundError(f"Schema file not found: {schema_path}")
+
+              with schema_path.open("r", encoding="utf-8") as f:
+                  schema = json.load(f)
+
+              Draft202012Validator.check_schema(schema)
+              print(f"OK: Schema is valid JSON Schema Draft 2020-12: {schema_path}")
+
+              validator = Draft202012Validator(
+                  schema,
+                  format_checker=FormatChecker()
+              )
+
+              for example_path in example_paths:
+                  if not example_path.exists():
+                      raise FileNotFoundError(f"Example file not found: {example_path}")
+
+                  with example_path.open("r", encoding="utf-8") as f:
+                      example = json.load(f)
+
+                  errors = sorted(
+                      validator.iter_errors(example),
+                      key=lambda e: list(e.path)
+                  )
+
+                  if errors:
+                      print(f"\nERROR: Validation failed: {example_path}")
+                      for error in errors:
+                          path = ".".join(str(part) for part in error.path) or "(root)"
+                          print(f"  - Path: {path}")
+                          print(f"    Message: {error.message}")
+                      raise SystemExit(1)
+
+                  print(f"OK: Example validates: {example_path}")
+
+          print("\nAll Royalty OS Trace Layer v3.0 schema validations passed.")
+          PY
