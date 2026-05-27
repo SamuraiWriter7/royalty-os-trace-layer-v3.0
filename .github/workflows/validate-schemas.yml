@@ -52,6 +52,7 @@ jobs:
                       Path("examples/trace-event.concept-reference.example.json"),
                       Path("examples/trace-event.direct-quote.example.json"),
                       Path("examples/trace-event.outlier-origin.example.json"),
+                      Path("examples/trace-event.note-rag-reference.example.json"),
                   ],
               },
               {
