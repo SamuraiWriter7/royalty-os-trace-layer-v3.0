@@ -1,0 +1,75 @@
+{
+  "schema_version": "3.0",
+  "trace_id": "trace_2026_05_note_rag_reference_0001",
+  "content_os_id": "royalty-os:jp:samuraiwriter7:note-rag-experiment-001",
+  "timestamp": "2026-05-27T12:10:00+09:00",
+  "session_id": "session_anonymized_note_rag_001",
+  "trace_context": {
+    "environment": "research",
+    "trace_source": "rag_retrieval_log",
+    "jurisdiction": "JP"
+  },
+  "actor": {
+    "ai_model_id": "example-rag-system-v1",
+    "provider_id": "example-note-rag-provider",
+    "deployment_context": "rag",
+    "system_role": "generator"
+  },
+  "retrieval": {
+    "retrieval_score": 0.88,
+    "retrieval_granularity": "concept",
+    "retrieved_fragment_hash": "sha256:6f2a9c1e4b7d0f3a8c5e1b9d2f6a4c7e0b3d8f1a5c9e2b6d4f7a0c3e8b1d5f9a",
+    "retrieved_fragment_length": 1240,
+    "retrieval_rank": 2,
+    "retrieval_method": "semantic_search"
+  },
+  "usage": {
+    "usage_type": "concept_reference",
+    "output_fragment_hash": "sha256:1c9e4b7d0f3a8c5e2b6d4f7a0c3e8b1d5f9a6f2a9c1e4b7d0f3a8c5e2b6d4f7a",
+    "output_granularity": "concept",
+    "citation_visible_to_user": false,
+    "human_visible_use": true
+  },
+  "permission": {
+    "permission_scope": "allow_reference",
+    "permission_status": "valid",
+    "license_uri": "https://example.org/licenses/royalty-os-reference-v3",
+    "permission_evidence_hash": "sha256:8d1f4a7c0e3b6d9f2a5c8e1b4f7a0c3e6b9d2f5a8c1e4b7d0f3a6c9e2b5d8f1a"
+  },
+  "verification": {
+    "watermark_detected": false,
+    "c2pa_manifest_detected": false,
+    "soft_binding_resolved": true,
+    "retrieval_log_confirmed": true,
+    "outlier_origin_detected": true,
+    "verification_confidence": 0.83,
+    "verification_methods": [
+      "soft_binding",
+      "retrieval_log",
+      "fragment_hash",
+      "semantic_similarity",
+      "outlier_detection"
+    ]
+  },
+  "attribution": {
+    "influence_estimate": 0.72,
+    "origin_score": 0.91,
+    "attribution_confidence": 0.78,
+    "allocation_readiness": "trigger_candidate",
+    "attribution_method": "semantic_similarity"
+  },
+  "privacy": {
+    "user_prompt_stored": false,
+    "user_identity_stored": false,
+    "anonymized_session": true,
+    "raw_content_stored": false,
+    "privacy_mode": "hash_only"
+  },
+  "evidence": {
+    "evidence_bundle_id": "evidence_bundle_note_rag_reference_2026_05_0001",
+    "evidence_bundle_hash": "sha256:3e8b1d5f9a6f2a9c1e4b7d0f3a8c5e2b6d4f7a0c3e8b1d5f9a6f2a9c1e4b7d0f",
+    "manifest_uri": "https://example.org/manifests/note-rag-experiment-001.json",
+    "audit_log_uri": "https://example.org/audit/trace_2026_05_note_rag_reference_0001"
+  },
+  "notes": "This example represents a note/RAG reference experiment. A public note-style article with Royalty OS Metadata was retrieved by a RAG-like system. The AI output did not directly quote the article, but it referenced the article's original concept or explanatory structure. The event is treated as a trigger candidate for downstream allocation review, not as an automatic payment event."
+}
