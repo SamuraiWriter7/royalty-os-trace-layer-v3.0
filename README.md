@@ -60,6 +60,7 @@ Royalty OS Trace Layer v3.0 is designed to support:
 - Allocation-readiness status
 - Allocation Trigger generation
 - Human or multi-party review before final distribution
+- note/RAG-style social proof experiments
 - Interoperability with future Royalty OS, RSL, C2PA, RAG, and AI audit ecosystems
 
 ---
@@ -77,6 +78,7 @@ This repository does **not** attempt to:
 - Claim perfect attribution accuracy
 - Require all AI systems to use one centralized registry
 - Store unnecessary user identity or raw prompts
+- Claim that any external platform currently implements this specification
 
 The Trace Layer provides evidence.
 
@@ -111,6 +113,7 @@ Possible mechanisms include:
 - C2PA-style manifest metadata
 - Royalty OS content identifiers
 - Soft binding to external manifests or registries
+- Article-level metadata blocks for early experiments
 
 Example metadata:
 
@@ -139,6 +142,7 @@ Typical logging sources include:
 - Evaluation runs
 - Manual audits
 - Third-party reports
+- Simulated note/RAG experiment records
 
 The core object of this layer is the **Royalty Trace Event**.
 
@@ -226,6 +230,7 @@ It may describe:
 - Paraphrase
 - Training signal
 - Evaluation reference
+- note/RAG-style reference experiment
 
 Schema:
 
@@ -391,6 +396,67 @@ docs/outlier-origin-detection.md
 
 ---
 
+## note/RAG Experiment
+
+This repository includes an experimental note/RAG workflow.
+
+The experiment explores whether a public article with machine-readable metadata can be represented as a traceable AI reference event.
+
+The minimal flow is:
+
+```text
+note-style article
+  ↓
+Royalty OS Metadata block
+  ↓
+RAG retrieval or AI reference
+  ↓
+Royalty Trace Event
+  ↓
+Allocation Trigger candidate
+```
+
+This is not a claim that note or any external platform currently implements this specification.
+
+It is a social proof and prototyping model for AI-era traceability.
+
+Relevant files:
+
+```text
+docs/note-rag-experiment-notes.md
+examples/trace-event.note-rag-reference.example.json
+```
+
+Example metadata block:
+
+```yaml
+Royalty OS Metadata:
+  os_id: "royalty-os:jp:samuraiwriter7:example-article-001"
+  title: "Example Article Title"
+  author_id: "royalty-os:creator:jp:samuraiwriter7"
+  permission_scope: "allow_reference"
+  preferred_usage:
+    - concept_reference
+    - structural_influence
+    - factual_grounding
+  attribution_request: "cite_origin_when_possible"
+  trace_priority: "high"
+  version: "1.0"
+  related_repository: "SamuraiWriter7/royalty-os-trace-layer-v3.0"
+```
+
+The purpose is to show that AI reference activity can be:
+
+```text
+visible
+structured
+privacy-aware
+reviewable
+allocation-ready
+```
+
+---
+
 ## Allocation Readiness
 
 The Trace Layer does not distribute value directly.
@@ -475,6 +541,7 @@ royalty-os-trace-layer-v3.0/
     trace-event.concept-reference.example.json
     trace-event.direct-quote.example.json
     trace-event.outlier-origin.example.json
+    trace-event.note-rag-reference.example.json
     allocation-trigger.example.json
 
   docs/
@@ -482,6 +549,7 @@ royalty-os-trace-layer-v3.0/
     relationship-to-allocation-layer.md
     outlier-origin-detection.md
     privacy-and-compliance-notes.md
+    note-rag-experiment-notes.md
 
   .github/
     workflows/
@@ -501,11 +569,13 @@ Recommended reading order:
 5. `examples/trace-event.concept-reference.example.json`
 6. `examples/trace-event.direct-quote.example.json`
 7. `examples/trace-event.outlier-origin.example.json`
-8. `schemas/royalty-allocation-trigger-v3.0.schema.json`
-9. `examples/allocation-trigger.example.json`
-10. `docs/relationship-to-allocation-layer.md`
-11. `docs/outlier-origin-detection.md`
-12. `docs/privacy-and-compliance-notes.md`
+8. `docs/note-rag-experiment-notes.md`
+9. `examples/trace-event.note-rag-reference.example.json`
+10. `schemas/royalty-allocation-trigger-v3.0.schema.json`
+11. `examples/allocation-trigger.example.json`
+12. `docs/relationship-to-allocation-layer.md`
+13. `docs/outlier-origin-detection.md`
+14. `docs/privacy-and-compliance-notes.md`
 
 ---
 
@@ -517,6 +587,7 @@ Recommended reading order:
 | `docs/relationship-to-allocation-layer.md` | Explains how Trace connects to Allocation without directly distributing value |
 | `docs/outlier-origin-detection.md` | Defines the v3.0 origin-detection concept |
 | `docs/privacy-and-compliance-notes.md` | Provides privacy and compliance design notes |
+| `docs/note-rag-experiment-notes.md` | Describes an experimental note/RAG workflow for social proof and trace validation |
 
 ---
 
@@ -528,6 +599,7 @@ Recommended reading order:
 | `trace-event.concept-reference.example.json` | AI references an original concept or coined term |
 | `trace-event.direct-quote.example.json` | AI directly quotes a registered source fragment |
 | `trace-event.outlier-origin.example.json` | AI references a statistically distinctive origin signal |
+| `trace-event.note-rag-reference.example.json` | A note-style article is retrieved in a RAG-like environment and traced as a concept or structure reference |
 | `allocation-trigger.example.json` | Trace events are converted into an allocation-review candidate |
 
 ---
@@ -547,7 +619,8 @@ schemas/royalty-trace-event-v3.0.schema.json
   ├─ examples/trace-event.structural-influence.example.json
   ├─ examples/trace-event.concept-reference.example.json
   ├─ examples/trace-event.direct-quote.example.json
-  └─ examples/trace-event.outlier-origin.example.json
+  ├─ examples/trace-event.outlier-origin.example.json
+  └─ examples/trace-event.note-rag-reference.example.json
 
 schemas/royalty-allocation-trigger-v3.0.schema.json
   └─ examples/allocation-trigger.example.json
@@ -617,6 +690,14 @@ Trace event records source, usage, permission, and influence
 
 This makes AI reference activity visible and auditable.
 
+The note/RAG experiment is a lightweight social proof model for this direction.
+
+See:
+
+```text
+docs/note-rag-experiment-notes.md
+```
+
 ---
 
 ## Relationship to C2PA-style Provenance
@@ -642,6 +723,13 @@ royalty:
   permission_scope: "allow_reference"
   version: "3.0"
   trace_priority: "high"
+```
+
+C2PA-style provenance and Royalty OS Trace are related but not identical:
+
+```text
+C2PA-style provenance = where the content came from
+Royalty OS Trace = how AI used the content
 ```
 
 ---
@@ -695,7 +783,7 @@ The Allocation Layer and review systems decide how that evidence should be handl
 ```text
 Status: Draft
 Specification version: Royalty OS Trace Layer v3.0
-Repository release stage: v0.1.0 candidate
+Repository release stage: v0.1.1 candidate
 ```
 
 This repository is experimental and intended for specification design, prototyping, and interoperability discussion.
@@ -707,6 +795,7 @@ It should not be treated as:
 - A complete implementation
 - A payment system
 - A copyright enforcement system
+- A claim of external platform adoption
 
 ---
 
@@ -727,6 +816,7 @@ examples/trace-event.summary.example.json
 examples/trace-event.training-signal.example.json
 examples/allocation-trigger.direct-quote.example.json
 examples/allocation-trigger.aggregated-usage.example.json
+examples/allocation-trigger.note-rag.example.json
 ```
 
 Possible future documents:
@@ -740,6 +830,8 @@ docs/relationship-to-rag-ecosystem.md
 docs/relationship-to-rsl.md
 docs/evidence-bundle-model.md
 docs/dispute-and-review-flow.md
+docs/note-metadata-block-template.md
+docs/note-rag-experiment-report-template.md
 ```
 
 Possible implementation components:
@@ -752,6 +844,7 @@ Possible implementation components:
 - Dashboard data model
 - Privacy-preserving proof format
 - Multi-provider trace aggregation prototype
+- note/RAG experiment report generator
 
 ---
 
@@ -779,13 +872,13 @@ The Trace Layer exists to preserve that evidence.
 
 ## License
 
-To be determined.
+This repository is released under the MIT License.
 
-Recommended options:
+See:
 
-- MIT License for schemas and examples
-- CC BY 4.0 for documentation
-- Apache-2.0 if implementation code is added later
+```text
+LICENSE
+```
 
 ---
 
@@ -793,13 +886,28 @@ Recommended options:
 
 If you use or reference this specification, please cite this repository.
 
-A `CITATION.cff` file will be added in a future version.
+See:
+
+```text
+CITATION.cff
+```
 
 ---
 
 ## Version History
 
-### v0.1.0-candidate
+### v0.1.1-candidate
+
+Adds the note/RAG experiment line.
+
+Includes:
+
+- `docs/note-rag-experiment-notes.md`
+- `examples/trace-event.note-rag-reference.example.json`
+- Updated schema validation workflow to include the note/RAG trace example
+- Updated README sections for Repository Structure, Start Here, Key Documents, Examples, and validation targets
+
+### v0.1.0
 
 Initial repository structure for Royalty OS Trace Layer v3.0.
 
