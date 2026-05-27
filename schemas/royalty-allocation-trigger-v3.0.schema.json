@@ -1,0 +1,392 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/royalty-allocation-trigger-v3.0.schema.json",
+  "title": "Royalty OS Allocation Trigger v3.0",
+  "description": "A machine-readable schema for signaling that one or more Royalty OS Trace Events may be ready for downstream allocation review or allocation processing.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "trigger_id",
+    "trigger_type",
+    "timestamp",
+    "source_trace_events",
+    "allocation_candidate",
+    "review_status",
+    "decision_context"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "3.0",
+      "description": "Version of the Royalty OS Allocation Trigger schema."
+    },
+    "trigger_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "description": "Unique identifier for this allocation trigger event."
+    },
+    "trigger_type": {
+      "type": "string",
+      "enum": [
+        "single_trace_event",
+        "aggregated_trace_events",
+        "threshold_exceeded",
+        "manual_review_request",
+        "dispute_review_request",
+        "periodic_settlement_candidate",
+        "other"
+      ],
+      "description": "Type of allocation trigger."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the allocation trigger was generated."
+    },
+    "source_trace_events": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Trace events that caused this allocation trigger.",
+      "items": {
+        "$ref": "#/$defs/source_trace_event"
+      }
+    },
+    "allocation_candidate": {
+      "$ref": "#/$defs/allocation_candidate"
+    },
+    "review_status": {
+      "$ref": "#/$defs/review_status"
+    },
+    "decision_context": {
+      "$ref": "#/$defs/decision_context"
+    },
+    "privacy": {
+      "$ref": "#/$defs/privacy"
+    },
+    "evidence": {
+      "$ref": "#/$defs/evidence"
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "Optional human-readable notes about the allocation trigger."
+    }
+  },
+  "$defs": {
+    "source_trace_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trace_id",
+        "content_os_id",
+        "usage_type",
+        "allocation_readiness",
+        "influence_estimate",
+        "origin_score",
+        "verification_confidence"
+      ],
+      "properties": {
+        "trace_id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "description": "Identifier of the source Royalty Trace Event."
+        },
+        "content_os_id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 512,
+          "pattern": "^[A-Za-z0-9._:/#-]+$",
+          "description": "Royalty OS content identifier associated with the source trace event."
+        },
+        "usage_type": {
+          "type": "string",
+          "enum": [
+            "direct_quote",
+            "factual_grounding",
+            "concept_reference",
+            "structural_influence",
+            "style_reference",
+            "summary",
+            "translation",
+            "paraphrase",
+            "training_signal",
+            "evaluation_reference",
+            "other"
+          ],
+          "description": "Usage type inherited from the source trace event."
+        },
+        "allocation_readiness": {
+          "type": "string",
+          "enum": [
+            "review_required",
+            "trigger_candidate",
+            "ready"
+          ],
+          "description": "Allocation readiness status inherited from the source trace event. Events marked not_ready should not trigger allocation."
+        },
+        "influence_estimate": {
+          "$ref": "#/$defs/score_0_1",
+          "description": "Influence estimate inherited from the source trace event."
+        },
+        "origin_score": {
+          "$ref": "#/$defs/score_0_1",
+          "description": "Origin score inherited from the source trace event."
+        },
+        "verification_confidence": {
+          "$ref": "#/$defs/score_0_1",
+          "description": "Verification confidence inherited from the source trace event."
+        },
+        "weight": {
+          "$ref": "#/$defs/score_0_1",
+          "description": "Optional normalized weight of this trace event within the allocation candidate bundle."
+        }
+      }
+    },
+    "allocation_candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "recipient_os_id",
+        "content_os_id",
+        "allocation_basis",
+        "candidate_score",
+        "recommended_action"
+      ],
+      "properties": {
+        "candidate_id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "description": "Unique identifier for the allocation candidate."
+        },
+        "recipient_os_id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 512,
+          "pattern": "^[A-Za-z0-9._:/#-]+$",
+          "description": "Identifier of the candidate recipient, rights holder, creator, or registered entity."
+        },
+        "content_os_id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 512,
+          "pattern": "^[A-Za-z0-9._:/#-]+$",
+          "description": "Royalty OS content identifier for the work, concept, structure, or source asset."
+        },
+        "allocation_basis": {
+          "type": "string",
+          "enum": [
+            "direct_quote",
+            "verified_reference",
+            "conceptual_influence",
+            "structural_influence",
+            "outlier_origin",
+            "aggregated_usage",
+            "manual_review",
+            "other"
+          ],
+          "description": "Primary basis for considering allocation."
+        },
+        "candidate_score": {
+          "$ref": "#/$defs/score_0_1",
+          "description": "Overall score indicating strength of the allocation candidate."
+        },
+        "recommended_action": {
+          "type": "string",
+          "enum": [
+            "no_action",
+            "request_review",
+            "prepare_allocation",
+            "hold_for_dispute_check",
+            "aggregate_until_threshold",
+            "manual_decision_required"
+          ],
+          "description": "Recommended downstream action for the Allocation Layer."
+        },
+        "suggested_allocation_band": {
+          "type": "string",
+          "enum": [
+            "none",
+            "micro",
+            "low",
+            "medium",
+            "high",
+            "custom",
+            "undetermined"
+          ],
+          "description": "Non-binding suggested allocation band. This is not a final payment decision."
+        }
+      }
+    },
+    "review_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "requires_human_review",
+        "requires_dispute_check"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "review_required",
+            "approved_for_allocation_review",
+            "blocked",
+            "rejected",
+            "superseded"
+          ],
+          "description": "Current review status of the allocation trigger."
+        },
+        "requires_human_review": {
+          "type": "boolean",
+          "description": "Whether human or multi-party review is required before allocation."
+        },
+        "requires_dispute_check": {
+          "type": "boolean",
+          "description": "Whether dispute registry or conflict review is required before allocation."
+        },
+        "review_reason": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "Optional reason explaining why review is required or why the trigger was blocked."
+        }
+      }
+    },
+    "decision_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_mode",
+        "automation_level",
+        "allocation_policy_id"
+      ],
+      "properties": {
+        "decision_mode": {
+          "type": "string",
+          "enum": [
+            "evidence_only",
+            "review_gate",
+            "allocation_candidate",
+            "allocation_ready",
+            "settlement_candidate"
+          ],
+          "description": "Decision mode describing how this trigger should be interpreted."
+        },
+        "automation_level": {
+          "type": "string",
+          "enum": [
+            "none",
+            "assistive",
+            "semi_automated",
+            "automated_with_review",
+            "fully_automated"
+          ],
+          "description": "Degree of automation permitted for downstream processing."
+        },
+        "allocation_policy_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "description": "Identifier of the allocation policy, rule set, or settlement framework applied to this trigger."
+        },
+        "thresholds": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "minimum_influence_estimate": {
+              "$ref": "#/$defs/score_0_1"
+            },
+            "minimum_origin_score": {
+              "$ref": "#/$defs/score_0_1"
+            },
+            "minimum_verification_confidence": {
+              "$ref": "#/$defs/score_0_1"
+            },
+            "minimum_candidate_score": {
+              "$ref": "#/$defs/score_0_1"
+            }
+          },
+          "description": "Optional threshold values used to generate this trigger."
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Privacy-preserving controls applied to this allocation trigger.",
+      "properties": {
+        "user_identity_excluded": {
+          "type": "boolean",
+          "description": "Whether end-user identity was excluded from this trigger."
+        },
+        "raw_prompt_excluded": {
+          "type": "boolean",
+          "description": "Whether raw prompts were excluded from this trigger."
+        },
+        "raw_content_excluded": {
+          "type": "boolean",
+          "description": "Whether raw source content was excluded from this trigger."
+        },
+        "privacy_mode": {
+          "type": "string",
+          "enum": [
+            "hash_only",
+            "aggregated",
+            "pseudonymous",
+            "redacted",
+            "full",
+            "unknown"
+          ],
+          "description": "Privacy mode applied to the allocation trigger."
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Evidence references supporting this allocation trigger.",
+      "properties": {
+        "evidence_bundle_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "description": "Identifier of the evidence bundle associated with this trigger."
+        },
+        "evidence_bundle_hash": {
+          "$ref": "#/$defs/hash_string",
+          "description": "Hash of the evidence bundle."
+        },
+        "trace_receipt_bundle_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of a trace receipt bundle, if available."
+        },
+        "review_record_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of an external review record or audit package."
+        }
+      }
+    },
+    "score_0_1": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "hash_string": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 512,
+      "pattern": "^(sha256:|sha384:|sha512:)?[A-Za-z0-9._:/+=-]+$"
+    }
+  }
+}
