@@ -1,0 +1,76 @@
+{
+  "schema_version": "3.0",
+  "trace_id": "trace_2026_05_royalty_os_concept_0001",
+  "content_os_id": "royalty-os:jp:shidenkai-alpha:intzei-os-v3:concept-001",
+  "timestamp": "2026-05-27T10:45:00+09:00",
+  "session_id": "session_anonymized_b91c",
+  "trace_context": {
+    "environment": "research",
+    "trace_source": "rag_retrieval_log",
+    "jurisdiction": "JP"
+  },
+  "actor": {
+    "ai_model_id": "example-rag-agent-v1",
+    "provider_id": "example-provider",
+    "deployment_context": "rag",
+    "system_role": "generator"
+  },
+  "retrieval": {
+    "retrieval_score": 0.88,
+    "retrieval_granularity": "concept",
+    "retrieved_fragment_hash": "sha256:3a7f1c9e2b6d4f8a0c5e9b1d7f3a6c2e8b4d9f1a7c3e5b8d0f6a2c9e1b7d4f8a",
+    "retrieved_fragment_length": 620,
+    "retrieval_rank": 2,
+    "retrieval_method": "semantic_search"
+  },
+  "usage": {
+    "usage_type": "concept_reference",
+    "output_fragment_hash": "sha256:8c2e5b9a1f7d3c6e0b4a8f2d9c1e7b5a3f6d8c0e2b9a4f1d7c3e6b8a0f5d2c9e",
+    "output_granularity": "concept",
+    "citation_visible_to_user": false,
+    "human_visible_use": true
+  },
+  "permission": {
+    "permission_scope": "allow_reference",
+    "permission_status": "valid",
+    "license_uri": "https://example.org/licenses/royalty-os-reference-v3",
+    "permission_evidence_hash": "sha256:1f8a3c6e9b2d5f7a0c4e8b1d6f3a9c2e5b7d0f4a8c1e6b9d2f5a7c0e3b8d1f6a"
+  },
+  "verification": {
+    "watermark_detected": false,
+    "c2pa_manifest_detected": true,
+    "soft_binding_resolved": true,
+    "retrieval_log_confirmed": true,
+    "outlier_origin_detected": true,
+    "verification_confidence": 0.84,
+    "verification_methods": [
+      "c2pa_manifest",
+      "soft_binding",
+      "retrieval_log",
+      "fragment_hash",
+      "semantic_similarity",
+      "outlier_detection"
+    ]
+  },
+  "attribution": {
+    "influence_estimate": 0.68,
+    "origin_score": 0.91,
+    "attribution_confidence": 0.79,
+    "allocation_readiness": "trigger_candidate",
+    "attribution_method": "semantic_similarity"
+  },
+  "privacy": {
+    "user_prompt_stored": false,
+    "user_identity_stored": false,
+    "anonymized_session": true,
+    "raw_content_stored": false,
+    "privacy_mode": "hash_only"
+  },
+  "evidence": {
+    "evidence_bundle_id": "evidence_bundle_trace_2026_05_concept_0001",
+    "evidence_bundle_hash": "sha256:6e2b9a4f1d7c3e8b0f5a2c9e1b7d4f8a3c6e0b9d2f5a7c1e8b4d0f6a2c9e3b7d",
+    "manifest_uri": "https://example.org/manifests/royalty-os-concept-001.json",
+    "audit_log_uri": "https://example.org/audit/trace_2026_05_royalty_os_concept_0001"
+  },
+  "notes": "This example represents a concept reference trace event. The AI system did not directly quote the source text, but it retrieved and reused an original concept, coined term, or theoretical idea as part of the generated response."
+}
