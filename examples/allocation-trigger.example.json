@@ -1,0 +1,67 @@
+{
+  "schema_version": "3.0",
+  "trigger_id": "allocation_trigger_2026_05_royalty_os_0001",
+  "trigger_type": "aggregated_trace_events",
+  "timestamp": "2026-05-27T11:45:00+09:00",
+  "source_trace_events": [
+    {
+      "trace_id": "trace_2026_05_royalty_os_structural_0001",
+      "content_os_id": "royalty-os:jp:shidenkai-alpha:intzei-os-v3:trace-layer-001",
+      "usage_type": "structural_influence",
+      "allocation_readiness": "trigger_candidate",
+      "influence_estimate": 0.76,
+      "origin_score": 0.94,
+      "verification_confidence": 0.89,
+      "weight": 0.48
+    },
+    {
+      "trace_id": "trace_2026_05_royalty_os_outlier_origin_0001",
+      "content_os_id": "royalty-os:jp:shidenkai-alpha:intzei-os-v3:outlier-origin-001",
+      "usage_type": "concept_reference",
+      "allocation_readiness": "trigger_candidate",
+      "influence_estimate": 0.73,
+      "origin_score": 0.97,
+      "verification_confidence": 0.87,
+      "weight": 0.52
+    }
+  ],
+  "allocation_candidate": {
+    "candidate_id": "allocation_candidate_2026_05_royalty_os_0001",
+    "recipient_os_id": "royalty-os:creator:jp:shidenkai-alpha",
+    "content_os_id": "royalty-os:jp:shidenkai-alpha:intzei-os-v3:trace-layer-001",
+    "allocation_basis": "outlier_origin",
+    "candidate_score": 0.91,
+    "recommended_action": "request_review",
+    "suggested_allocation_band": "medium"
+  },
+  "review_status": {
+    "status": "review_required",
+    "requires_human_review": true,
+    "requires_dispute_check": true,
+    "review_reason": "The trigger is based on aggregated structural influence and outlier origin signals. Human or multi-party review is required before any allocation decision."
+  },
+  "decision_context": {
+    "decision_mode": "allocation_candidate",
+    "automation_level": "assistive",
+    "allocation_policy_id": "royalty-os-allocation-policy-v3.0-draft",
+    "thresholds": {
+      "minimum_influence_estimate": 0.7,
+      "minimum_origin_score": 0.9,
+      "minimum_verification_confidence": 0.85,
+      "minimum_candidate_score": 0.9
+    }
+  },
+  "privacy": {
+    "user_identity_excluded": true,
+    "raw_prompt_excluded": true,
+    "raw_content_excluded": true,
+    "privacy_mode": "hash_only"
+  },
+  "evidence": {
+    "evidence_bundle_id": "evidence_bundle_allocation_trigger_2026_05_0001",
+    "evidence_bundle_hash": "sha256:5a7c1e8b4d0f6a2c9e3b7d1f8a4c6e0b9d2f5a7c1e8b4d0f6a2c9e3b7d1f8a4",
+    "trace_receipt_bundle_uri": "https://example.org/trace-receipts/allocation_trigger_2026_05_royalty_os_0001.json",
+    "review_record_uri": "https://example.org/reviews/allocation_candidate_2026_05_royalty_os_0001"
+  },
+  "notes": "This example represents an allocation trigger generated from multiple trace events. It does not execute payment or final allocation. It signals that the referenced work, concept, or structure may be eligible for downstream allocation review."
+}
