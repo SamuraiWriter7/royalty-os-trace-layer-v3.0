@@ -1,0 +1,76 @@
+{
+  "schema_version": "3.0",
+  "trace_id": "trace_2026_05_royalty_os_direct_quote_0001",
+  "content_os_id": "royalty-os:jp:shidenkai-alpha:intzei-os-v3:quote-001",
+  "timestamp": "2026-05-27T11:00:00+09:00",
+  "session_id": "session_anonymized_d42f",
+  "trace_context": {
+    "environment": "research",
+    "trace_source": "rag_retrieval_log",
+    "jurisdiction": "JP"
+  },
+  "actor": {
+    "ai_model_id": "example-rag-agent-v1",
+    "provider_id": "example-provider",
+    "deployment_context": "rag",
+    "system_role": "generator"
+  },
+  "retrieval": {
+    "retrieval_score": 0.97,
+    "retrieval_granularity": "sentence",
+    "retrieved_fragment_hash": "sha256:4b7d1e9f2a6c3e8b0f5a9d1c7e3b6f8a2c5d9e1b4f7a0c3e6b8d2f5a9c1e4b7d",
+    "retrieved_fragment_length": 148,
+    "retrieval_rank": 1,
+    "retrieval_method": "hybrid_search"
+  },
+  "usage": {
+    "usage_type": "direct_quote",
+    "output_fragment_hash": "sha256:9a1f4c7e2b5d8f0a3c6e9b2d5f8a1c4e7b0d3f6a9c2e5b8d1f4a7c0e3b6d9f2a",
+    "output_granularity": "sentence",
+    "citation_visible_to_user": true,
+    "human_visible_use": true
+  },
+  "permission": {
+    "permission_scope": "allow_quote",
+    "permission_status": "valid",
+    "license_uri": "https://example.org/licenses/royalty-os-quote-v3",
+    "permission_evidence_hash": "sha256:2f5a8c1e4b7d0f3a6c9e2b5d8f1a4c7e0b3d6f9a2c5e8b1d4f7a0c3e6b9d2f5a"
+  },
+  "verification": {
+    "watermark_detected": true,
+    "c2pa_manifest_detected": true,
+    "soft_binding_resolved": true,
+    "retrieval_log_confirmed": true,
+    "outlier_origin_detected": false,
+    "verification_confidence": 0.96,
+    "verification_methods": [
+      "watermark",
+      "c2pa_manifest",
+      "soft_binding",
+      "retrieval_log",
+      "fragment_hash",
+      "semantic_similarity"
+    ]
+  },
+  "attribution": {
+    "influence_estimate": 0.87,
+    "origin_score": 0.72,
+    "attribution_confidence": 0.94,
+    "allocation_readiness": "ready",
+    "attribution_method": "retrieval_weighted"
+  },
+  "privacy": {
+    "user_prompt_stored": false,
+    "user_identity_stored": false,
+    "anonymized_session": true,
+    "raw_content_stored": false,
+    "privacy_mode": "hash_only"
+  },
+  "evidence": {
+    "evidence_bundle_id": "evidence_bundle_trace_2026_05_direct_quote_0001",
+    "evidence_bundle_hash": "sha256:7c0e3b6d9f2a5c8e1b4f7a0c3e6b9d2f5a8c1e4b7d0f3a6c9e2b5d8f1a4c7e0b",
+    "manifest_uri": "https://example.org/manifests/royalty-os-quote-001.json",
+    "audit_log_uri": "https://example.org/audit/trace_2026_05_royalty_os_direct_quote_0001"
+  },
+  "notes": "This example represents a direct quote trace event. The AI system retrieved a registered source fragment and reproduced it in the user-facing output with visible citation or attribution."
+}
