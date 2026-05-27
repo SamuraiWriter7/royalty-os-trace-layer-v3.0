@@ -6,13 +6,76 @@ This repository follows a lightweight versioning model during the early specific
 
 ---
 
-## [v0.1.0-candidate] - 2026-05-27
+## [v0.1.1-candidate] - 2026-05-27
+
+### Added
+
+#### note/RAG Experiment Line
+
+- Added `docs/note-rag-experiment-notes.md`
+  - Describes an experimental workflow for connecting note-style publishing, RAG retrieval, Royalty Trace Events, and Allocation Trigger candidates.
+  - Defines a lightweight article-level metadata block for early social proof experiments.
+  - Clarifies that the experiment does not claim external platform adoption or production integration.
+  - Positions the note/RAG workflow as a prototype for AI-era traceability.
+
+- Added `examples/trace-event.note-rag-reference.example.json`
+  - Demonstrates a trace event where a note-style article is retrieved in a RAG-like environment.
+  - Represents concept reference and outlier-origin-style influence without direct quotation.
+  - Uses privacy-conscious trace settings such as `hash_only`, no raw prompt storage, and anonymized session identifiers.
+  - Marks the event as an allocation trigger candidate, not an automatic payment event.
+
+### Updated
+
+- Updated `.github/workflows/validate-schemas.yml`
+  - Added `examples/trace-event.note-rag-reference.example.json` to the Trace Event validation set.
+  - The validation workflow now checks five Trace Event examples and one Allocation Trigger example.
+
+- Updated `README.md`
+  - Added the note/RAG experiment to Design Goals.
+  - Added note/RAG experimental records to the Logging Layer description.
+  - Added `note/RAG-style reference experiment` to the Royalty Trace Event description.
+  - Added a new `note/RAG Experiment` section.
+  - Updated `Repository Structure`.
+  - Updated `Start Here`.
+  - Updated `Key Documents`.
+  - Updated `Examples`.
+  - Updated schema validation targets.
+  - Updated current status to `v0.1.1 candidate`.
+  - Added note/RAG-related future extensions.
+
+### Core Concepts Added
+
+- note/RAG-style social proof experiment
+- article-level Royalty OS Metadata block
+- machine-readable metadata for public articles
+- simulated or observed RAG retrieval tracing
+- note-style article as traceable AI reference source
+- concept reference without direct quotation
+- privacy-aware note/RAG trace event
+- social proof before formal platform integration
+- traceable public knowledge article
+- experimental route toward C2PA-style extension
+
+### Notes
+
+This release extends the initial Trace Layer specification with a concrete social proof path.
+
+The note/RAG experiment is intentionally lightweight.  
+It can be tested without requiring direct platform integration.
+
+The purpose is to demonstrate that public articles can be represented as machine-readable trace sources in AI retrieval environments.
+
+This release does not claim that note, AI providers, or any external platform currently implements this specification.
+
+---
+
+## [v0.1.0] - 2026-05-27
 
 ### Added
 
 Initial repository structure for **Royalty OS Trace Layer v3.0**.
 
-This candidate release introduces the first working specification set for recording authorized AI usage, trace evidence, attribution signals, and allocation-trigger candidates.
+This release introduces the first working specification set for recording authorized AI usage, trace evidence, attribution signals, and allocation-trigger candidates.
 
 #### Core Schemas
 
@@ -113,7 +176,7 @@ No permission without machine-readable structure.
 Make AI usage traceable without making people traceable.
 Notes
 
-This is an early draft candidate.
+This is an early draft release.
 
 The repository is intended for specification design, prototyping, interoperability discussion, and future implementation experiments.
 
@@ -127,5 +190,5 @@ a copyright enforcement system
 an automatic attribution engine
 Status
 Specification: Royalty OS Trace Layer v3.0
-Repository stage: v0.1.0 candidate
+Repository stage: v0.1.0
 Status: Draft
