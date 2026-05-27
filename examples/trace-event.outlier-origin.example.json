@@ -1,0 +1,76 @@
+{
+  "schema_version": "3.0",
+  "trace_id": "trace_2026_05_royalty_os_outlier_origin_0001",
+  "content_os_id": "royalty-os:jp:shidenkai-alpha:intzei-os-v3:outlier-origin-001",
+  "timestamp": "2026-05-27T11:20:00+09:00",
+  "session_id": "session_anonymized_f73a",
+  "trace_context": {
+    "environment": "research",
+    "trace_source": "rag_retrieval_log",
+    "jurisdiction": "JP"
+  },
+  "actor": {
+    "ai_model_id": "example-rag-agent-v1",
+    "provider_id": "example-provider",
+    "deployment_context": "rag",
+    "system_role": "generator"
+  },
+  "retrieval": {
+    "retrieval_score": 0.91,
+    "retrieval_granularity": "concept",
+    "retrieved_fragment_hash": "sha256:0f6a2c9e1b7d4f8a3c6e0b9d2f5a7c1e8b4d0f6a2c9e3b7d1f8a4c6e0b9d2f5a",
+    "retrieved_fragment_length": 980,
+    "retrieval_rank": 1,
+    "retrieval_method": "semantic_search"
+  },
+  "usage": {
+    "usage_type": "concept_reference",
+    "output_fragment_hash": "sha256:4d9f1a7c3e5b8d0f6a2c9e1b7d4f8a3c6e0b9d2f5a7c1e8b4d0f6a2c9e3b7d",
+    "output_granularity": "concept",
+    "citation_visible_to_user": false,
+    "human_visible_use": true
+  },
+  "permission": {
+    "permission_scope": "allow_reference",
+    "permission_status": "valid",
+    "license_uri": "https://example.org/licenses/royalty-os-reference-v3",
+    "permission_evidence_hash": "sha256:8b4d0f6a2c9e3b7d1f8a4c6e0b9d2f5a7c1e8b4d0f6a2c9e3b7d1f8a4c6e0b9d"
+  },
+  "verification": {
+    "watermark_detected": false,
+    "c2pa_manifest_detected": true,
+    "soft_binding_resolved": true,
+    "retrieval_log_confirmed": true,
+    "outlier_origin_detected": true,
+    "verification_confidence": 0.87,
+    "verification_methods": [
+      "c2pa_manifest",
+      "soft_binding",
+      "retrieval_log",
+      "fragment_hash",
+      "semantic_similarity",
+      "outlier_detection"
+    ]
+  },
+  "attribution": {
+    "influence_estimate": 0.73,
+    "origin_score": 0.97,
+    "attribution_confidence": 0.81,
+    "allocation_readiness": "trigger_candidate",
+    "attribution_method": "hybrid"
+  },
+  "privacy": {
+    "user_prompt_stored": false,
+    "user_identity_stored": false,
+    "anonymized_session": true,
+    "raw_content_stored": false,
+    "privacy_mode": "hash_only"
+  },
+  "evidence": {
+    "evidence_bundle_id": "evidence_bundle_trace_2026_05_outlier_origin_0001",
+    "evidence_bundle_hash": "sha256:2c9e1b7d4f8a3c6e0b9d2f5a7c1e8b4d0f6a2c9e3b7d1f8a4c6e0b9d2f5a7c1e",
+    "manifest_uri": "https://example.org/manifests/royalty-os-outlier-origin-001.json",
+    "audit_log_uri": "https://example.org/audit/trace_2026_05_royalty_os_outlier_origin_0001"
+  },
+  "notes": "This example represents an outlier origin trace event. The AI system did not directly quote the source, but the referenced concept or framework was detected as a statistically unusual origin signal with high originality and trace priority."
+}
