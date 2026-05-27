@@ -1,0 +1,511 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/royalty-trace-event-v3.0.schema.json",
+  "title": "Royalty OS Trace Event v3.0",
+  "description": "A machine-readable trace event schema for recording authorized AI retrieval, reference, influence, verification, and allocation-readiness signals in Royalty OS v3.0.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "trace_id",
+    "content_os_id",
+    "timestamp",
+    "actor",
+    "retrieval",
+    "usage",
+    "permission",
+    "verification",
+    "attribution"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "3.0",
+      "description": "Version of the Royalty OS Trace Event schema."
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "description": "Unique identifier for this trace event."
+    },
+    "content_os_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 512,
+      "pattern": "^[A-Za-z0-9._:/#-]+$",
+      "description": "Royalty OS content identifier for the referenced work, fragment, concept, or structure."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the trace event in RFC 3339 / ISO 8601 date-time format."
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Optional anonymized session identifier. Raw user identity should not be stored here."
+    },
+    "trace_context": {
+      "$ref": "#/$defs/trace_context"
+    },
+    "actor": {
+      "$ref": "#/$defs/actor"
+    },
+    "retrieval": {
+      "$ref": "#/$defs/retrieval"
+    },
+    "usage": {
+      "$ref": "#/$defs/usage"
+    },
+    "permission": {
+      "$ref": "#/$defs/permission"
+    },
+    "verification": {
+      "$ref": "#/$defs/verification"
+    },
+    "attribution": {
+      "$ref": "#/$defs/attribution"
+    },
+    "privacy": {
+      "$ref": "#/$defs/privacy"
+    },
+    "evidence": {
+      "$ref": "#/$defs/evidence"
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "Optional human-readable implementation notes."
+    }
+  },
+  "$defs": {
+    "trace_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Contextual metadata about where and how the trace event occurred.",
+      "properties": {
+        "environment": {
+          "type": "string",
+          "enum": [
+            "production",
+            "staging",
+            "research",
+            "test",
+            "unknown"
+          ],
+          "description": "Operational environment in which the trace was recorded."
+        },
+        "trace_source": {
+          "type": "string",
+          "enum": [
+            "rag_retrieval_log",
+            "ai_search_log",
+            "agent_memory_log",
+            "training_data_audit",
+            "evaluation_run",
+            "manual_audit",
+            "third_party_report",
+            "other"
+          ],
+          "description": "Primary source from which this trace event was generated."
+        },
+        "jurisdiction": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 64,
+          "description": "Optional jurisdiction or region relevant to this trace event, such as JP, EU, US, or global."
+        }
+      }
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "AI system, provider, or deployment context involved in the usage event.",
+      "required": [
+        "ai_model_id",
+        "provider_id"
+      ],
+      "properties": {
+        "ai_model_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "description": "Identifier of the AI model, system, or agent that performed the retrieval or usage."
+        },
+        "provider_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "description": "Identifier of the AI provider, platform, application, or system operator."
+        },
+        "deployment_context": {
+          "type": "string",
+          "enum": [
+            "rag",
+            "search",
+            "agent",
+            "training",
+            "fine_tuning",
+            "evaluation",
+            "summarization",
+            "recommendation",
+            "other"
+          ],
+          "description": "Deployment context in which the usage occurred."
+        },
+        "system_role": {
+          "type": "string",
+          "enum": [
+            "retriever",
+            "generator",
+            "ranker",
+            "summarizer",
+            "agent",
+            "evaluator",
+            "unknown"
+          ],
+          "description": "Functional role of the AI component in the trace event."
+        }
+      }
+    },
+    "retrieval": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Retrieval-level evidence about the referenced content.",
+      "required": [
+        "retrieval_score",
+        "retrieval_granularity"
+      ],
+      "properties": {
+        "retrieval_score": {
+          "$ref": "#/$defs/score_0_1",
+          "description": "Similarity, relevance, or retrieval confidence score."
+        },
+        "retrieval_granularity": {
+          "type": "string",
+          "enum": [
+            "token",
+            "sentence",
+            "paragraph",
+            "section",
+            "document",
+            "concept",
+            "structure",
+            "dataset",
+            "unknown"
+          ],
+          "description": "Granularity level at which the content was retrieved or matched."
+        },
+        "retrieved_fragment_hash": {
+          "$ref": "#/$defs/hash_string",
+          "description": "Hash of the retrieved fragment, if available."
+        },
+        "retrieved_fragment_length": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Length of the retrieved fragment in tokens, characters, or implementation-defined units."
+        },
+        "retrieval_rank": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Rank position of the retrieved item in the retrieval result set."
+        },
+        "retrieval_method": {
+          "type": "string",
+          "enum": [
+            "keyword",
+            "embedding_similarity",
+            "hybrid_search",
+            "semantic_search",
+            "graph_retrieval",
+            "manual",
+            "unknown",
+            "other"
+          ],
+          "description": "Retrieval method used to identify the referenced content."
+        }
+      }
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "How the retrieved or referenced content was used by the AI system.",
+      "required": [
+        "usage_type"
+      ],
+      "properties": {
+        "usage_type": {
+          "type": "string",
+          "enum": [
+            "direct_quote",
+            "factual_grounding",
+            "concept_reference",
+            "structural_influence",
+            "style_reference",
+            "summary",
+            "translation",
+            "paraphrase",
+            "training_signal",
+            "evaluation_reference",
+            "other"
+          ],
+          "description": "Type of usage inferred or recorded for the referenced content."
+        },
+        "output_fragment_hash": {
+          "$ref": "#/$defs/hash_string",
+          "description": "Hash of the output fragment influenced by the referenced content, if available."
+        },
+        "output_granularity": {
+          "type": "string",
+          "enum": [
+            "token",
+            "sentence",
+            "paragraph",
+            "section",
+            "document",
+            "concept",
+            "structure",
+            "unknown"
+          ],
+          "description": "Granularity of the output region associated with this trace event."
+        },
+        "citation_visible_to_user": {
+          "type": "boolean",
+          "description": "Whether the AI output exposed a visible citation, link, attribution, or source reference to the end user."
+        },
+        "human_visible_use": {
+          "type": "boolean",
+          "description": "Whether the usage was visible in the final user-facing output."
+        }
+      }
+    },
+    "permission": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Permission and licensing status relevant to the usage event.",
+      "required": [
+        "permission_scope",
+        "permission_status"
+      ],
+      "properties": {
+        "permission_scope": {
+          "type": "string",
+          "enum": [
+            "allow_reference",
+            "allow_summary",
+            "allow_quote",
+            "allow_training",
+            "allow_evaluation",
+            "allow_indexing",
+            "allow_rag",
+            "restricted",
+            "deny",
+            "unknown"
+          ],
+          "description": "Declared or detected permission scope for this content."
+        },
+        "permission_status": {
+          "type": "string",
+          "enum": [
+            "valid",
+            "expired",
+            "missing",
+            "conflicted",
+            "revoked",
+            "unknown"
+          ],
+          "description": "Operational status of the permission at the time of usage."
+        },
+        "license_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of the relevant license, permission policy, or rights statement."
+        },
+        "permission_evidence_hash": {
+          "$ref": "#/$defs/hash_string",
+          "description": "Hash of permission evidence or policy snapshot."
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Verification signals supporting the authenticity and attribution relevance of the trace event.",
+      "required": [
+        "verification_confidence"
+      ],
+      "properties": {
+        "watermark_detected": {
+          "type": "boolean",
+          "description": "Whether a watermark or watermark-like signal was detected."
+        },
+        "c2pa_manifest_detected": {
+          "type": "boolean",
+          "description": "Whether a C2PA-style manifest or provenance metadata was detected."
+        },
+        "soft_binding_resolved": {
+          "type": "boolean",
+          "description": "Whether soft binding to an external manifest, registry, or provenance record was resolved."
+        },
+        "retrieval_log_confirmed": {
+          "type": "boolean",
+          "description": "Whether the usage was confirmed by a retrieval or system log."
+        },
+        "outlier_origin_detected": {
+          "type": "boolean",
+          "description": "Whether the content, concept, or structure was identified as a statistical or semantic outlier origin."
+        },
+        "verification_confidence": {
+          "$ref": "#/$defs/score_0_1",
+          "description": "Overall confidence score for verification of the trace event."
+        },
+        "verification_methods": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "watermark",
+              "c2pa_manifest",
+              "soft_binding",
+              "retrieval_log",
+              "fragment_hash",
+              "semantic_similarity",
+              "outlier_detection",
+              "manual_review",
+              "third_party_attestation",
+              "other"
+            ]
+          },
+          "uniqueItems": true,
+          "description": "Verification methods used to support this trace event."
+        }
+      }
+    },
+    "attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Attribution-related scores and readiness status for downstream review or allocation.",
+      "required": [
+        "influence_estimate",
+        "origin_score",
+        "allocation_readiness"
+      ],
+      "properties": {
+        "influence_estimate": {
+          "$ref": "#/$defs/score_0_1",
+          "description": "Estimated degree of influence on the AI output or system behavior."
+        },
+        "origin_score": {
+          "$ref": "#/$defs/score_0_1",
+          "description": "Estimated originality or origin relevance score of the referenced content, concept, or structure."
+        },
+        "attribution_confidence": {
+          "$ref": "#/$defs/score_0_1",
+          "description": "Confidence in the attribution relationship between the source and the output."
+        },
+        "allocation_readiness": {
+          "type": "string",
+          "enum": [
+            "not_ready",
+            "review_required",
+            "trigger_candidate",
+            "ready"
+          ],
+          "description": "Readiness status for downstream allocation review."
+        },
+        "attribution_method": {
+          "type": "string",
+          "enum": [
+            "token_level",
+            "attention_based",
+            "shapley_like",
+            "retrieval_weighted",
+            "semantic_similarity",
+            "structure_fingerprint",
+            "manual_review",
+            "hybrid",
+            "unknown",
+            "other"
+          ],
+          "description": "Method used to estimate attribution or influence."
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Privacy-preserving controls applied to this trace event.",
+      "properties": {
+        "user_prompt_stored": {
+          "type": "boolean",
+          "description": "Whether the raw user prompt was stored."
+        },
+        "user_identity_stored": {
+          "type": "boolean",
+          "description": "Whether directly identifying user information was stored."
+        },
+        "anonymized_session": {
+          "type": "boolean",
+          "description": "Whether the session identifier is anonymized or pseudonymized."
+        },
+        "raw_content_stored": {
+          "type": "boolean",
+          "description": "Whether raw referenced content was stored in the trace record."
+        },
+        "privacy_mode": {
+          "type": "string",
+          "enum": [
+            "full",
+            "pseudonymous",
+            "hash_only",
+            "aggregated",
+            "redacted",
+            "unknown"
+          ],
+          "description": "Privacy mode applied to the trace event."
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional evidence bundle references associated with this trace event.",
+      "properties": {
+        "evidence_bundle_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "description": "Identifier of an external evidence bundle, audit package, or trace receipt."
+        },
+        "evidence_bundle_hash": {
+          "$ref": "#/$defs/hash_string",
+          "description": "Hash of the evidence bundle."
+        },
+        "manifest_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of an external manifest, provenance record, or trace receipt."
+        },
+        "audit_log_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of an external audit log or provider-side trace record."
+        }
+      }
+    },
+    "score_0_1": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "hash_string": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 512,
+      "pattern": "^(sha256:|sha384:|sha512:)?[A-Za-z0-9._:/+=-]+$"
+    }
+  }
+}
