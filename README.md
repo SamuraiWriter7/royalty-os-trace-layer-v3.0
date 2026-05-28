@@ -43,6 +43,36 @@ AI reference as traceable value circulation
 
 ---
 
+## Civilization OS Context
+
+Royalty OS Trace Layer v3.0 can also be understood as part of a broader Civilization OS architecture.
+
+In that wider architecture, the Trace Layer sits between Permission and Allocation.
+
+```text
+Origin
+  ↓
+Structure
+  ↓
+Permission
+  ↓
+Trace
+  ↓
+Allocation
+  ↓
+Civilization Circulation
+```
+
+The Trace Layer records AI usage evidence and produces allocation-trigger candidates, while leaving judgment and distribution to downstream review and allocation systems.
+
+See:
+
+```text
+docs/civilization-os-architecture.md
+```
+
+---
+
 ## Design Goals
 
 Royalty OS Trace Layer v3.0 is designed to support:
@@ -62,6 +92,7 @@ Royalty OS Trace Layer v3.0 is designed to support:
 * Allocation Trigger generation
 * Human or multi-party review before final distribution
 * note/RAG-style social proof experiments
+* Civilization OS-level architecture mapping
 * Interoperability with future Royalty OS, RSL, C2PA, RAG, provenance, and AI audit ecosystems
 
 ---
@@ -81,6 +112,7 @@ This repository does **not** attempt to:
 * Require all AI systems to use one centralized registry
 * Store unnecessary user identity or raw prompts
 * Claim that any external platform currently implements this specification
+* Define a complete Civilization OS implementation
 
 The Trace Layer provides evidence.
 
@@ -556,6 +588,40 @@ The purpose is to connect content provenance to AI usage traceability.
 
 ---
 
+## Civilization OS Architecture
+
+This repository includes a higher-level Civilization OS architecture document.
+
+It explains where Trace Layer v3.0 sits in the broader flow from human origin to evidence, allocation, and value circulation.
+
+Relevant file:
+
+```text
+docs/civilization-os-architecture.md
+```
+
+The broader flow is:
+
+```text
+Origin
+  ↓
+Structure
+  ↓
+Permission
+  ↓
+Trace
+  ↓
+Allocation
+  ↓
+Civilization Circulation
+```
+
+This document clarifies that Royalty OS Trace Layer v3.0 is not the entire Civilization OS.
+
+It is the evidence layer that makes Civilization OS technically discussable.
+
+---
+
 ## Allocation Readiness
 
 The Trace Layer does not distribute value directly.
@@ -647,6 +713,7 @@ royalty-os-trace-layer-v3.0/
 
   docs/
     architecture-overview.md
+    civilization-os-architecture.md
     relationship-to-allocation-layer.md
     relationship-to-c2pa.md
     outlier-origin-detection.md
@@ -666,21 +733,22 @@ Recommended reading order:
 
 1. `README.md`
 2. `docs/architecture-overview.md`
-3. `schemas/royalty-trace-event-v3.0.schema.json`
-4. `examples/trace-event.structural-influence.example.json`
-5. `examples/trace-event.concept-reference.example.json`
-6. `examples/trace-event.direct-quote.example.json`
-7. `examples/trace-event.outlier-origin.example.json`
-8. `docs/note-rag-experiment-notes.md`
-9. `examples/trace-event.note-rag-reference.example.json`
-10. `schemas/royalty-allocation-trigger-v3.0.schema.json`
-11. `examples/allocation-trigger.example.json`
-12. `docs/relationship-to-allocation-layer.md`
-13. `docs/relationship-to-c2pa.md`
-14. `schemas/royalty-c2pa-extension-v3.0.schema.json`
-15. `examples/royalty-c2pa-extension.example.json`
-16. `docs/outlier-origin-detection.md`
-17. `docs/privacy-and-compliance-notes.md`
+3. `docs/civilization-os-architecture.md`
+4. `schemas/royalty-trace-event-v3.0.schema.json`
+5. `examples/trace-event.structural-influence.example.json`
+6. `examples/trace-event.concept-reference.example.json`
+7. `examples/trace-event.direct-quote.example.json`
+8. `examples/trace-event.outlier-origin.example.json`
+9. `docs/note-rag-experiment-notes.md`
+10. `examples/trace-event.note-rag-reference.example.json`
+11. `schemas/royalty-allocation-trigger-v3.0.schema.json`
+12. `examples/allocation-trigger.example.json`
+13. `docs/relationship-to-allocation-layer.md`
+14. `docs/relationship-to-c2pa.md`
+15. `schemas/royalty-c2pa-extension-v3.0.schema.json`
+16. `examples/royalty-c2pa-extension.example.json`
+17. `docs/outlier-origin-detection.md`
+18. `docs/privacy-and-compliance-notes.md`
 
 ---
 
@@ -689,6 +757,7 @@ Recommended reading order:
 | Document                                   | Purpose                                                                           |
 | ------------------------------------------ | --------------------------------------------------------------------------------- |
 | `docs/architecture-overview.md`            | Explains the full Trace Layer architecture                                        |
+| `docs/civilization-os-architecture.md`     | Places Trace Layer v3.0 inside the broader Civilization OS stack                  |
 | `docs/relationship-to-allocation-layer.md` | Explains how Trace connects to Allocation without directly distributing value     |
 | `docs/relationship-to-c2pa.md`             | Explains how Royalty OS Trace complements C2PA-style provenance                   |
 | `docs/outlier-origin-detection.md`         | Defines the v3.0 origin-detection concept                                         |
@@ -844,6 +913,33 @@ examples/royalty-c2pa-extension.example.json
 
 ---
 
+## Relationship to Civilization OS
+
+Royalty OS Trace Layer v3.0 is one component of a broader Civilization OS architecture.
+
+In that broader model:
+
+```text
+Provenance identifies.
+Permission allows.
+Trace records.
+Review judges.
+Allocation distributes.
+Civilization remembers.
+```
+
+This repository focuses on Trace Layer v3.0 and its immediate bridges.
+
+It does not attempt to implement the full Civilization OS.
+
+See:
+
+```text
+docs/civilization-os-architecture.md
+```
+
+---
+
 ## Relationship to Watermarking
 
 Watermarking may help verify whether content was generated, transformed, or derived from a known source.
@@ -893,7 +989,7 @@ The Allocation Layer and review systems decide how that evidence should be handl
 ```text
 Status: Draft
 Specification version: Royalty OS Trace Layer v3.0
-Repository release stage: v0.1.2 candidate
+Repository release stage: v0.1.3 candidate
 ```
 
 This repository is experimental and intended for specification design, prototyping, and interoperability discussion.
@@ -907,6 +1003,7 @@ It should not be treated as:
 * A copyright enforcement system
 * A replacement for C2PA
 * A claim of external platform adoption
+* A complete Civilization OS implementation
 
 ---
 
@@ -916,6 +1013,8 @@ Possible future schemas:
 
 ```text
 schemas/royalty-attribution-score-v3.0.schema.json
+schemas/evidence-bundle-v3.0.schema.json
+schemas/trace-receipt-v3.0.schema.json
 ```
 
 Possible future examples:
@@ -932,12 +1031,15 @@ examples/allocation-trigger.note-rag.example.json
 Possible future documents:
 
 ```text
+docs/implementation-roadmap.md
 docs/embedding-layer.md
 docs/logging-layer.md
 docs/verification-layer.md
 docs/relationship-to-rag-ecosystem.md
 docs/relationship-to-rsl.md
 docs/evidence-bundle-model.md
+docs/trace-receipt-model.md
+docs/review-gate-model.md
 docs/dispute-and-review-flow.md
 docs/note-metadata-block-template.md
 docs/note-rag-experiment-report-template.md
@@ -956,6 +1058,7 @@ Possible implementation components:
 * Multi-provider trace aggregation prototype
 * note/RAG experiment report generator
 * C2PA-style metadata adapter
+* Civilization OS architecture map
 
 ---
 
@@ -1007,7 +1110,16 @@ CITATION.cff
 
 ## Version History
 
-### v0.1.2-candidate
+### v0.1.3-candidate
+
+Adds Civilization OS architecture mapping.
+
+Includes:
+
+* `docs/civilization-os-architecture.md`
+* Updated README sections for Civilization OS Context, Design Goals, Civilization OS Architecture, Repository Structure, Start Here, Key Documents, Relationship to Civilization OS, Current Status, and Future Extensions
+
+### v0.1.2
 
 Adds C2PA Extension support.
 
