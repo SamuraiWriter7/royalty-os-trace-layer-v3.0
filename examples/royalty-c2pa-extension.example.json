@@ -1,0 +1,58 @@
+{
+  "schema_version": "3.0",
+  "extension_type": "royalty_os_c2pa_extension",
+  "c2pa_context": {
+    "manifest_uri": "https://example.org/c2pa/manifests/royalty-os-trace-layer-001.json",
+    "manifest_hash": "sha256:4f7a0c3e6b9d2f5a8c1e4b7d0f3a6c9e2b5d8f1a4c7e0b3d6f9a2c5e8b1d4f7a",
+    "asset_id": "c2pa-asset:royalty-os-trace-layer-001",
+    "claim_id": "c2pa-claim:royalty-os-trace-layer-001",
+    "assertion_id": "c2pa-assertion:royalty-os-extension-001",
+    "signature_status": "valid",
+    "manifest_embedded": false,
+    "external_manifest_resolved": true
+  },
+  "royalty": {
+    "os_id": "royalty-os:jp:samuraiwriter7:royalty-os-trace-layer-v3.0",
+    "title": "Royalty OS Trace Layer v3.0",
+    "author_id": "royalty-os:creator:jp:samuraiwriter7",
+    "recipient_os_id": "royalty-os:creator:jp:samuraiwriter7",
+    "content_type": "structure",
+    "version": "3.0",
+    "permission_scope": "allow_reference",
+    "preferred_usage": [
+      "concept_reference",
+      "structural_influence",
+      "factual_grounding"
+    ],
+    "attribution_request": "cite_origin_when_possible",
+    "trace_priority": "high",
+    "license_uri": "https://example.org/licenses/royalty-os-reference-v3",
+    "policy_uri": "https://example.org/policies/royalty-os-trace-policy-v3",
+    "related_repository": "SamuraiWriter7/royalty-os-trace-layer-v3.0",
+    "jurisdiction": "JP",
+    "created_at": "2026-05-27T12:30:00+09:00",
+    "updated_at": "2026-05-27T12:30:00+09:00"
+  },
+  "trace_policy": {
+    "trace_enabled": true,
+    "trace_granularity": [
+      "concept",
+      "structure",
+      "document"
+    ],
+    "outlier_origin_tracking": true,
+    "allocation_trigger_allowed": true,
+    "review_required_before_allocation": true,
+    "privacy_mode": "hash_only",
+    "retention_hint": "review_period"
+  },
+  "evidence": {
+    "content_hash": "sha256:9f2a5c8e1b4f7a0c3e6b9d2f5a8c1e4b7d0f3a6c9e2b5d8f1a4c7e0b3d6f9a",
+    "metadata_hash": "sha256:6b9d2f5a8c1e4b7d0f3a6c9e2b5d8f1a4c7e0b3d6f9a2c5e8b1d4f7a0c3e",
+    "evidence_bundle_uri": "https://example.org/evidence/royalty-os-trace-layer-001.json",
+    "evidence_bundle_hash": "sha256:1e4b7d0f3a6c9e2b5d8f1a4c7e0b3d6f9a2c5e8b1d4f7a0c3e6b9d2f5a8c",
+    "trace_receipt_uri": "https://example.org/trace-receipts/royalty-os-trace-layer-001.json",
+    "registration_record_uri": "https://example.org/registry/royalty-os-trace-layer-001"
+  },
+  "notes": "This example represents a lightweight Royalty OS metadata extension for a C2PA-style manifest. It does not replace C2PA provenance. It adds permission, trace-priority, preferred AI usage, and allocation-review signals that can later support Royalty Trace Events."
+}
