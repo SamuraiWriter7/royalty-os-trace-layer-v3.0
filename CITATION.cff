@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use or reference this specification, please cite it as below."
 title: "Royalty OS Trace Layer v3.0"
 type: software
-version: "0.1.1-candidate"
+version: "0.1.2-candidate"
 date-released: "2026-05-27"
 
 authors:
@@ -15,9 +15,9 @@ abstract: >
   for recording authorized AI usage, retrieval events, provenance signals,
   attribution evidence, and allocation-trigger candidates. It defines
   trace events, allocation triggers, outlier origin detection, privacy-aware
-  evidence handling, note/RAG-style social proof experiments, and the
-  separation between trace, review, and allocation in AI-era value circulation
-  infrastructure.
+  evidence handling, note/RAG-style social proof experiments, lightweight
+  Royalty OS C2PA Extension metadata, and the separation between trace,
+  review, and allocation in AI-era value circulation infrastructure.
 
 keywords:
   - royalty-os
@@ -27,6 +27,7 @@ keywords:
   - rag
   - note-rag
   - c2pa
+  - c2pa-extension
   - watermarking
   - allocation-trigger
   - outlier-origin-detection
@@ -38,6 +39,8 @@ keywords:
   - traceability
   - social-proof
   - ai-audit
+  - content-provenance
+  - usage-trace
 
 repository-code: "https://github.com/SamuraiWriter7/royalty-os-trace-layer-v3.0"
 
@@ -46,7 +49,7 @@ license: "MIT"
 preferred-citation:
   type: software
   title: "Royalty OS Trace Layer v3.0"
-  version: "0.1.1-candidate"
+  version: "0.1.2-candidate"
   date-released: "2026-05-27"
   authors:
     - family-names: "Shidenkai"
@@ -56,5 +59,5 @@ preferred-citation:
   abstract: >
     A machine-readable specification for recording authorized AI usage,
     retrieval events, provenance signals, attribution evidence,
-    allocation-trigger candidates, and note/RAG-style social proof
-    experiments in Royalty OS v3.0.
+    allocation-trigger candidates, note/RAG-style social proof experiments,
+    and lightweight Royalty OS C2PA Extension metadata in Royalty OS v3.0.
