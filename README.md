@@ -6,7 +6,7 @@ This repository defines the **Trace Layer** of Royalty OS v3.0.
 
 The Trace Layer is designed to record how AI systems access, retrieve, reference, quote, summarize, transform, or structurally depend on creative and knowledge-based content.
 
-Its purpose is not to directly decide payment, ownership, or legal liability.  
+Its purpose is not to directly decide payment, ownership, or legal liability.
 Its purpose is to provide a reliable evidence layer that can connect to review and downstream allocation systems.
 
 ---
@@ -47,21 +47,22 @@ AI reference as traceable value circulation
 
 Royalty OS Trace Layer v3.0 is designed to support:
 
-- Machine-readable recording of AI retrieval and reference events
-- Permission-aware usage evidence
-- RAG retrieval logging
-- Direct quote tracing
-- Concept-level reference tracing
-- Structure-level influence tracing
-- Outlier origin detection
-- C2PA-inspired provenance metadata
-- Watermark-aware verification signals
-- Privacy-aware trace records
-- Allocation-readiness status
-- Allocation Trigger generation
-- Human or multi-party review before final distribution
-- note/RAG-style social proof experiments
-- Interoperability with future Royalty OS, RSL, C2PA, RAG, and AI audit ecosystems
+* Machine-readable recording of AI retrieval and reference events
+* Permission-aware usage evidence
+* RAG retrieval logging
+* Direct quote tracing
+* Concept-level reference tracing
+* Structure-level influence tracing
+* Outlier origin detection
+* C2PA-inspired provenance metadata
+* Lightweight Royalty OS C2PA Extension metadata
+* Watermark-aware verification signals
+* Privacy-aware trace records
+* Allocation-readiness status
+* Allocation Trigger generation
+* Human or multi-party review before final distribution
+* note/RAG-style social proof experiments
+* Interoperability with future Royalty OS, RSL, C2PA, RAG, provenance, and AI audit ecosystems
 
 ---
 
@@ -69,16 +70,17 @@ Royalty OS Trace Layer v3.0 is designed to support:
 
 This repository does **not** attempt to:
 
-- Prove legal authorship by itself
-- Automatically determine payment
-- Replace copyright law
-- Replace licensing contracts
-- Replace platform policies
-- Decide disputes without review
-- Claim perfect attribution accuracy
-- Require all AI systems to use one centralized registry
-- Store unnecessary user identity or raw prompts
-- Claim that any external platform currently implements this specification
+* Prove legal authorship by itself
+* Automatically determine payment
+* Replace copyright law
+* Replace licensing contracts
+* Replace platform policies
+* Replace C2PA
+* Decide disputes without review
+* Claim perfect attribution accuracy
+* Require all AI systems to use one centralized registry
+* Store unnecessary user identity or raw prompts
+* Claim that any external platform currently implements this specification
 
 The Trace Layer provides evidence.
 
@@ -108,12 +110,13 @@ The Embedding Layer attaches machine-readable identifiers, permission metadata, 
 
 Possible mechanisms include:
 
-- Text watermarking
-- Media watermarking
-- C2PA-style manifest metadata
-- Royalty OS content identifiers
-- Soft binding to external manifests or registries
-- Article-level metadata blocks for early experiments
+* Text watermarking
+* Media watermarking
+* C2PA-style manifest metadata
+* Royalty OS C2PA Extension metadata
+* Royalty OS content identifiers
+* Soft binding to external manifests or registries
+* Article-level metadata blocks for early experiments
 
 Example metadata:
 
@@ -135,14 +138,14 @@ The Logging Layer records what happened when an AI system retrieved, referenced,
 
 Typical logging sources include:
 
-- RAG retrieval logs
-- AI search logs
-- Agent memory logs
-- Training data audits
-- Evaluation runs
-- Manual audits
-- Third-party reports
-- Simulated note/RAG experiment records
+* RAG retrieval logs
+* AI search logs
+* Agent memory logs
+* Training data audits
+* Evaluation runs
+* Manual audits
+* Third-party reports
+* Simulated note/RAG experiment records
 
 The core object of this layer is the **Royalty Trace Event**.
 
@@ -154,16 +157,17 @@ The Verification Layer checks whether a trace event is supported by evidence.
 
 Possible verification signals include:
 
-- Watermark detection
-- C2PA-style manifest detection
-- Soft binding resolution
-- Retrieval log confirmation
-- Fragment hash comparison
-- Semantic similarity analysis
-- Structure similarity analysis
-- Outlier origin detection
-- Manual review
-- Third-party attestation
+* Watermark detection
+* C2PA-style manifest detection
+* Royalty OS C2PA Extension detection
+* Soft binding resolution
+* Retrieval log confirmation
+* Fragment hash comparison
+* Semantic similarity analysis
+* Structure similarity analysis
+* Outlier origin detection
+* Manual review
+* Third-party attestation
 
 The goal is not perfect certainty.
 
@@ -207,11 +211,12 @@ Distribution third.
 
 ## Core Schemas
 
-This repository currently defines two core schemas.
+This repository currently defines three core schemas.
 
 ```text
 schemas/royalty-trace-event-v3.0.schema.json
 schemas/royalty-allocation-trigger-v3.0.schema.json
+schemas/royalty-c2pa-extension-v3.0.schema.json
 ```
 
 ### Royalty Trace Event
@@ -220,17 +225,17 @@ A **Royalty Trace Event** records one meaningful instance of AI usage.
 
 It may describe:
 
-- Direct quote
-- Factual grounding
-- Concept reference
-- Structural influence
-- Style reference
-- Summary
-- Translation
-- Paraphrase
-- Training signal
-- Evaluation reference
-- note/RAG-style reference experiment
+* Direct quote
+* Factual grounding
+* Concept reference
+* Structural influence
+* Style reference
+* Summary
+* Translation
+* Paraphrase
+* Training signal
+* Evaluation reference
+* note/RAG-style reference experiment
 
 Schema:
 
@@ -254,6 +259,29 @@ Schema:
 
 ```text
 schemas/royalty-allocation-trigger-v3.0.schema.json
+```
+
+### Royalty C2PA Extension
+
+A **Royalty C2PA Extension** defines lightweight Royalty OS metadata fields that may complement C2PA-style provenance records.
+
+It does not replace C2PA.
+
+It adds machine-readable signals such as:
+
+* Royalty OS content ID
+* Permission scope
+* Preferred usage
+* Attribution request
+* Trace priority
+* Trace policy
+* Evidence references
+* Allocation trigger permission flags
+
+Schema:
+
+```text
+schemas/royalty-c2pa-extension-v3.0.schema.json
 ```
 
 ---
@@ -354,12 +382,12 @@ This distinction is important because AI systems do not only quote text.
 
 They may also reuse:
 
-- Concepts
-- Frameworks
-- Classifications
-- Structural patterns
-- Original terminology
-- Reasoning architectures
+* Concepts
+* Frameworks
+* Classifications
+* Structural patterns
+* Original terminology
+* Reasoning architectures
 
 Royalty OS v3.0 is especially concerned with concept-level and structure-level traces.
 
@@ -373,11 +401,11 @@ It identifies unusually original concepts, structures, or frameworks that may fu
 
 Examples include:
 
-- Newly coined terms
-- Original theoretical structures
-- Unique combinations of fields
-- High-density conceptual architectures
-- Rare structural patterns
+* Newly coined terms
+* Original theoretical structures
+* Unique combinations of fields
+* High-density conceptual architectures
+* Rare structural patterns
 
 Outlier detection does not automatically prove ownership.
 
@@ -457,6 +485,77 @@ allocation-ready
 
 ---
 
+## C2PA Extension
+
+This repository includes a lightweight Royalty OS C2PA Extension schema.
+
+The extension is designed to complement C2PA-style provenance records.
+
+It does not replace C2PA.
+
+The relationship is:
+
+```text
+C2PA-style provenance = where the content came from
+Royalty OS Trace = how AI used the content
+```
+
+Relevant files:
+
+```text
+docs/relationship-to-c2pa.md
+schemas/royalty-c2pa-extension-v3.0.schema.json
+examples/royalty-c2pa-extension.example.json
+```
+
+The C2PA Extension may include:
+
+* `royalty.os_id`
+* `royalty.permission_scope`
+* `royalty.preferred_usage`
+* `royalty.attribution_request`
+* `royalty.trace_priority`
+* `trace_policy.trace_enabled`
+* `trace_policy.outlier_origin_tracking`
+* `trace_policy.allocation_trigger_allowed`
+* `trace_policy.review_required_before_allocation`
+
+Example:
+
+```json
+{
+  "schema_version": "3.0",
+  "extension_type": "royalty_os_c2pa_extension",
+  "royalty": {
+    "os_id": "royalty-os:jp:samuraiwriter7:royalty-os-trace-layer-v3.0",
+    "permission_scope": "allow_reference",
+    "preferred_usage": [
+      "concept_reference",
+      "structural_influence",
+      "factual_grounding"
+    ],
+    "attribution_request": "cite_origin_when_possible",
+    "trace_priority": "high"
+  },
+  "trace_policy": {
+    "trace_enabled": true,
+    "trace_granularity": [
+      "concept",
+      "structure",
+      "document"
+    ],
+    "outlier_origin_tracking": true,
+    "allocation_trigger_allowed": true,
+    "review_required_before_allocation": true,
+    "privacy_mode": "hash_only"
+  }
+}
+```
+
+The purpose is to connect content provenance to AI usage traceability.
+
+---
+
 ## Allocation Readiness
 
 The Trace Layer does not distribute value directly.
@@ -472,12 +571,12 @@ ready
 
 Meaning:
 
-| Status | Meaning |
-|---|---|
-| `not_ready` | Evidence is weak, incomplete, or unsuitable |
-| `review_required` | Human or multi-party review is needed |
-| `trigger_candidate` | The trace may justify an allocation trigger |
-| `ready` | The trace is structured enough for downstream allocation processing |
+| Status              | Meaning                                                             |
+| ------------------- | ------------------------------------------------------------------- |
+| `not_ready`         | Evidence is weak, incomplete, or unsuitable                         |
+| `review_required`   | Human or multi-party review is needed                               |
+| `trigger_candidate` | The trace may justify an allocation trigger                         |
+| `ready`             | The trace is structured enough for downstream allocation processing |
 
 The Allocation Layer should treat these values as signals, not final commands.
 
@@ -535,6 +634,7 @@ royalty-os-trace-layer-v3.0/
   schemas/
     royalty-trace-event-v3.0.schema.json
     royalty-allocation-trigger-v3.0.schema.json
+    royalty-c2pa-extension-v3.0.schema.json
 
   examples/
     trace-event.structural-influence.example.json
@@ -543,10 +643,12 @@ royalty-os-trace-layer-v3.0/
     trace-event.outlier-origin.example.json
     trace-event.note-rag-reference.example.json
     allocation-trigger.example.json
+    royalty-c2pa-extension.example.json
 
   docs/
     architecture-overview.md
     relationship-to-allocation-layer.md
+    relationship-to-c2pa.md
     outlier-origin-detection.md
     privacy-and-compliance-notes.md
     note-rag-experiment-notes.md
@@ -574,33 +676,38 @@ Recommended reading order:
 10. `schemas/royalty-allocation-trigger-v3.0.schema.json`
 11. `examples/allocation-trigger.example.json`
 12. `docs/relationship-to-allocation-layer.md`
-13. `docs/outlier-origin-detection.md`
-14. `docs/privacy-and-compliance-notes.md`
+13. `docs/relationship-to-c2pa.md`
+14. `schemas/royalty-c2pa-extension-v3.0.schema.json`
+15. `examples/royalty-c2pa-extension.example.json`
+16. `docs/outlier-origin-detection.md`
+17. `docs/privacy-and-compliance-notes.md`
 
 ---
 
 ## Key Documents
 
-| Document | Purpose |
-|---|---|
-| `docs/architecture-overview.md` | Explains the full Trace Layer architecture |
-| `docs/relationship-to-allocation-layer.md` | Explains how Trace connects to Allocation without directly distributing value |
-| `docs/outlier-origin-detection.md` | Defines the v3.0 origin-detection concept |
-| `docs/privacy-and-compliance-notes.md` | Provides privacy and compliance design notes |
-| `docs/note-rag-experiment-notes.md` | Describes an experimental note/RAG workflow for social proof and trace validation |
+| Document                                   | Purpose                                                                           |
+| ------------------------------------------ | --------------------------------------------------------------------------------- |
+| `docs/architecture-overview.md`            | Explains the full Trace Layer architecture                                        |
+| `docs/relationship-to-allocation-layer.md` | Explains how Trace connects to Allocation without directly distributing value     |
+| `docs/relationship-to-c2pa.md`             | Explains how Royalty OS Trace complements C2PA-style provenance                   |
+| `docs/outlier-origin-detection.md`         | Defines the v3.0 origin-detection concept                                         |
+| `docs/privacy-and-compliance-notes.md`     | Provides privacy and compliance design notes                                      |
+| `docs/note-rag-experiment-notes.md`        | Describes an experimental note/RAG workflow for social proof and trace validation |
 
 ---
 
 ## Examples
 
-| Example | Purpose |
-|---|---|
-| `trace-event.structural-influence.example.json` | AI reuses a framework, architecture, or structural pattern |
-| `trace-event.concept-reference.example.json` | AI references an original concept or coined term |
-| `trace-event.direct-quote.example.json` | AI directly quotes a registered source fragment |
-| `trace-event.outlier-origin.example.json` | AI references a statistically distinctive origin signal |
-| `trace-event.note-rag-reference.example.json` | A note-style article is retrieved in a RAG-like environment and traced as a concept or structure reference |
-| `allocation-trigger.example.json` | Trace events are converted into an allocation-review candidate |
+| Example                                         | Purpose                                                                                                    |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `trace-event.structural-influence.example.json` | AI reuses a framework, architecture, or structural pattern                                                 |
+| `trace-event.concept-reference.example.json`    | AI references an original concept or coined term                                                           |
+| `trace-event.direct-quote.example.json`         | AI directly quotes a registered source fragment                                                            |
+| `trace-event.outlier-origin.example.json`       | AI references a statistically distinctive origin signal                                                    |
+| `trace-event.note-rag-reference.example.json`   | A note-style article is retrieved in a RAG-like environment and traced as a concept or structure reference |
+| `allocation-trigger.example.json`               | Trace events are converted into an allocation-review candidate                                             |
+| `royalty-c2pa-extension.example.json`           | Royalty OS metadata complements a C2PA-style provenance record                                             |
 
 ---
 
@@ -624,6 +731,9 @@ schemas/royalty-trace-event-v3.0.schema.json
 
 schemas/royalty-allocation-trigger-v3.0.schema.json
   └─ examples/allocation-trigger.example.json
+
+schemas/royalty-c2pa-extension-v3.0.schema.json
+  └─ examples/royalty-c2pa-extension.example.json
 ```
 
 Local validation can be performed with Python and `jsonschema`.
@@ -706,30 +816,30 @@ Royalty OS Trace Layer v3.0 can work with provenance metadata systems.
 
 C2PA-style manifests may provide:
 
-- Content identity
-- Creator or publisher metadata
-- Edit history
-- Manifest references
-- Asset provenance
-- External binding records
+* Content identity
+* Creator or publisher metadata
+* Edit history
+* Manifest references
+* Asset provenance
+* External binding records
 
 Royalty OS extends this idea toward AI usage traceability.
-
-Example extension:
-
-```yaml
-royalty:
-  os_id: "royalty-os:example:content:001"
-  permission_scope: "allow_reference"
-  version: "3.0"
-  trace_priority: "high"
-```
 
 C2PA-style provenance and Royalty OS Trace are related but not identical:
 
 ```text
 C2PA-style provenance = where the content came from
 Royalty OS Trace = how AI used the content
+```
+
+The Royalty C2PA Extension is a lightweight bridge between these layers.
+
+See:
+
+```text
+docs/relationship-to-c2pa.md
+schemas/royalty-c2pa-extension-v3.0.schema.json
+examples/royalty-c2pa-extension.example.json
 ```
 
 ---
@@ -762,18 +872,18 @@ Trace events and allocation triggers may be disputed.
 
 Possible reasons include:
 
-- Similar independent origins
-- Prior art
-- Incorrect permission status
-- False positive similarity
-- Incomplete retrieval logs
-- Weak attribution confidence
-- Multiple competing claims
-- Misidentified recipient
+* Similar independent origins
+* Prior art
+* Incorrect permission status
+* False positive similarity
+* Incomplete retrieval logs
+* Weak attribution confidence
+* Multiple competing claims
+* Misidentified recipient
 
 For this reason, the architecture assumes review before final allocation.
 
-The Trace Layer preserves evidence.  
+The Trace Layer preserves evidence.
 The Allocation Layer and review systems decide how that evidence should be handled.
 
 ---
@@ -783,19 +893,20 @@ The Allocation Layer and review systems decide how that evidence should be handl
 ```text
 Status: Draft
 Specification version: Royalty OS Trace Layer v3.0
-Repository release stage: v0.1.1 candidate
+Repository release stage: v0.1.2 candidate
 ```
 
 This repository is experimental and intended for specification design, prototyping, and interoperability discussion.
 
 It should not be treated as:
 
-- Legal advice
-- A final technical standard
-- A complete implementation
-- A payment system
-- A copyright enforcement system
-- A claim of external platform adoption
+* Legal advice
+* A final technical standard
+* A complete implementation
+* A payment system
+* A copyright enforcement system
+* A replacement for C2PA
+* A claim of external platform adoption
 
 ---
 
@@ -804,7 +915,6 @@ It should not be treated as:
 Possible future schemas:
 
 ```text
-schemas/royalty-c2pa-extension-v3.0.schema.json
 schemas/royalty-attribution-score-v3.0.schema.json
 ```
 
@@ -825,26 +935,27 @@ Possible future documents:
 docs/embedding-layer.md
 docs/logging-layer.md
 docs/verification-layer.md
-docs/relationship-to-c2pa.md
 docs/relationship-to-rag-ecosystem.md
 docs/relationship-to-rsl.md
 docs/evidence-bundle-model.md
 docs/dispute-and-review-flow.md
 docs/note-metadata-block-template.md
 docs/note-rag-experiment-report-template.md
+docs/c2pa-extension-implementation-notes.md
 ```
 
 Possible implementation components:
 
-- RAG trace adapter
-- Trace receipt generator
-- Allocation trigger generator
-- Evidence bundle builder
-- Provider-side trace reporter
-- Dashboard data model
-- Privacy-preserving proof format
-- Multi-provider trace aggregation prototype
-- note/RAG experiment report generator
+* RAG trace adapter
+* Trace receipt generator
+* Allocation trigger generator
+* Evidence bundle builder
+* Provider-side trace reporter
+* Dashboard data model
+* Privacy-preserving proof format
+* Multi-provider trace aggregation prototype
+* note/RAG experiment report generator
+* C2PA-style metadata adapter
 
 ---
 
@@ -862,8 +973,8 @@ AI systems increasingly retrieve, summarize, transform, and recombine human know
 
 The purpose of this repository is to define a minimal but extensible structure for recording that process.
 
-Not every AI reference should become a payment event.  
-Not every influence claim should be accepted automatically.  
+Not every AI reference should become a payment event.
+Not every influence claim should be accepted automatically.
 But meaningful usage should not disappear without evidence.
 
 The Trace Layer exists to preserve that evidence.
@@ -896,16 +1007,28 @@ CITATION.cff
 
 ## Version History
 
-### v0.1.1-candidate
+### v0.1.2-candidate
+
+Adds C2PA Extension support.
+
+Includes:
+
+* `docs/relationship-to-c2pa.md`
+* `schemas/royalty-c2pa-extension-v3.0.schema.json`
+* `examples/royalty-c2pa-extension.example.json`
+* Updated schema validation workflow to include the C2PA Extension schema and example
+* Updated README sections for Core Schemas, C2PA Extension, Repository Structure, Start Here, Key Documents, Examples, validation targets, C2PA relationship, and Future Extensions
+
+### v0.1.1
 
 Adds the note/RAG experiment line.
 
 Includes:
 
-- `docs/note-rag-experiment-notes.md`
-- `examples/trace-event.note-rag-reference.example.json`
-- Updated schema validation workflow to include the note/RAG trace example
-- Updated README sections for Repository Structure, Start Here, Key Documents, Examples, and validation targets
+* `docs/note-rag-experiment-notes.md`
+* `examples/trace-event.note-rag-reference.example.json`
+* Updated schema validation workflow to include the note/RAG trace example
+* Updated README sections for Repository Structure, Start Here, Key Documents, Examples, and validation targets
 
 ### v0.1.0
 
@@ -913,15 +1036,19 @@ Initial repository structure for Royalty OS Trace Layer v3.0.
 
 Includes:
 
-- Royalty Trace Event schema
-- Royalty Allocation Trigger schema
-- Structural influence trace example
-- Concept reference trace example
-- Direct quote trace example
-- Outlier origin trace example
-- Allocation trigger example
-- Architecture overview
-- Relationship to Allocation Layer notes
-- Outlier Origin Detection notes
-- Privacy and Compliance notes
-- GitHub Actions schema validation workflow
+* Royalty Trace Event schema
+* Royalty Allocation Trigger schema
+* Structural influence trace example
+* Concept reference trace example
+* Direct quote trace example
+* Outlier origin trace example
+* Allocation trigger example
+* Architecture overview
+* Relationship to Allocation Layer notes
+* Outlier Origin Detection notes
+* Privacy and Compliance notes
+* GitHub Actions schema validation workflow
+
+```
+```
+
