@@ -6,7 +6,119 @@ This repository follows a lightweight versioning model during the early specific
 
 ---
 
-## [v0.1.2-candidate] - 2026-05-27
+## [v0.1.3-candidate] - 2026-05-27
+
+### Added
+
+#### Civilization OS Architecture Mapping
+
+* Added `docs/civilization-os-architecture.md`
+
+  * Defines the broader Civilization OS architecture around Royalty OS Trace Layer v3.0.
+  * Places Trace Layer v3.0 between Permission and Allocation.
+  * Explains the six-layer architecture:
+
+    * Origin Layer
+    * Structure Layer
+    * Permission Layer
+    * Trace Layer
+    * Allocation Layer
+    * Civilization Circulation Layer
+  * Clarifies that Trace Layer v3.0 is the evidence layer within a broader civilization-scale value circulation model.
+  * Explains how human-originated concepts, structures, and creative works can become identifiable, structured, permission-aware, traceable, reviewable, and eventually allocation-ready.
+
+### Updated
+
+* Updated `README.md`
+
+  * Added a new `Civilization OS Context` section.
+  * Added Civilization OS-level architecture mapping to Design Goals.
+  * Added a new `Civilization OS Architecture` section.
+  * Updated `Repository Structure` to include `docs/civilization-os-architecture.md`.
+  * Updated `Start Here` to include the Civilization OS architecture document.
+  * Updated `Key Documents` to include the Civilization OS architecture document.
+  * Added a new `Relationship to Civilization OS` section.
+  * Updated `Current Status` to `v0.1.3 candidate`.
+  * Updated `Future Extensions` with Civilization OS-related roadmap items.
+
+### Core Concepts Added
+
+* Civilization OS architecture
+* Origin-to-circulation stack
+* six-layer architecture model
+* Origin Layer
+* Structure Layer
+* Permission Layer
+* Trace Layer
+* Allocation Layer
+* Civilization Circulation Layer
+* Trace Layer as evidence infrastructure
+* Trace Layer as the bridge between Permission and Allocation
+* value circulation as a civilization-level feedback loop
+* technology / institution / market / civilization axes
+* AI usage evidence as a basis for long-term knowledge circulation
+
+### Design Clarification
+
+This release clarifies the broader architectural position of Royalty OS Trace Layer v3.0.
+
+The Trace Layer is not the whole Civilization OS.
+
+It is the evidence layer that makes the broader system technically discussable.
+
+The core flow is:
+
+```text
+Origin
+  ↓
+Structure
+  ↓
+Permission
+  ↓
+Trace
+  ↓
+Allocation
+  ↓
+Civilization Circulation
+```
+
+The release also adds the following architectural principle:
+
+```text
+Provenance identifies.
+Permission allows.
+Trace records.
+Review judges.
+Allocation distributes.
+Civilization remembers.
+```
+
+### Notes
+
+This release does not define a full Civilization OS implementation.
+
+It provides an upper-level conceptual architecture showing where Royalty OS Trace Layer v3.0 fits within a broader value circulation stack.
+
+The document should be treated as:
+
+* conceptual
+* architectural
+* explanatory
+* non-legal
+* non-final
+* implementation-oriented, but not itself an implementation
+
+It should not be treated as:
+
+* a complete governance system
+* a legal standard
+* a payment system
+* a final technical standard
+* a claim of external adoption
+
+---
+
+## [v0.1.2] - 2026-05-27
 
 ### Added
 
@@ -78,6 +190,11 @@ This repository follows a lightweight versioning model during the early specific
   * Updated Relationship to C2PA-style Provenance.
   * Updated Current Status to `v0.1.2 candidate`.
   * Added C2PA-related future implementation components.
+
+* Updated `CITATION.cff`
+
+  * Updated version to `0.1.2-candidate`.
+  * Added C2PA Extension, content provenance, and usage trace keywords.
 
 ### Core Concepts Added
 
@@ -356,4 +473,5 @@ Specification: Royalty OS Trace Layer v3.0
 Repository stage: v0.1.0
 Status: Draft
 ```
+
 
