@@ -1,0 +1,358 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/royalty-c2pa-extension-v3.0.schema.json",
+  "title": "Royalty OS C2PA Extension v3.0",
+  "description": "A lightweight Royalty OS metadata extension schema for C2PA-style manifests. This schema describes machine-readable royalty, permission, trace-priority, and AI-usage metadata that can complement provenance records without replacing C2PA.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "royalty"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "3.0",
+      "description": "Version of the Royalty OS C2PA Extension schema."
+    },
+    "extension_type": {
+      "type": "string",
+      "const": "royalty_os_c2pa_extension",
+      "description": "Identifier for this extension object."
+    },
+    "c2pa_context": {
+      "$ref": "#/$defs/c2pa_context"
+    },
+    "royalty": {
+      "$ref": "#/$defs/royalty"
+    },
+    "trace_policy": {
+      "$ref": "#/$defs/trace_policy"
+    },
+    "evidence": {
+      "$ref": "#/$defs/evidence"
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 4000,
+      "description": "Optional human-readable notes about this Royalty OS metadata extension."
+    }
+  },
+  "$defs": {
+    "c2pa_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional contextual references to a C2PA-style manifest, assertion, claim, or asset.",
+      "properties": {
+        "manifest_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of the C2PA-style manifest or external manifest record."
+        },
+        "manifest_hash": {
+          "$ref": "#/$defs/hash_string",
+          "description": "Hash of the C2PA-style manifest or manifest payload."
+        },
+        "asset_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "description": "Identifier of the associated asset in the provenance system."
+        },
+        "claim_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "description": "Optional C2PA-style claim identifier."
+        },
+        "assertion_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "description": "Optional assertion identifier associated with this Royalty OS extension."
+        },
+        "signature_status": {
+          "type": "string",
+          "enum": [
+            "valid",
+            "invalid",
+            "missing",
+            "unchecked",
+            "unknown"
+          ],
+          "description": "Signature or trust status of the associated manifest or claim, if available."
+        },
+        "manifest_embedded": {
+          "type": "boolean",
+          "description": "Whether the manifest is embedded in the asset."
+        },
+        "external_manifest_resolved": {
+          "type": "boolean",
+          "description": "Whether an external manifest or soft-bound manifest reference was resolved."
+        }
+      }
+    },
+    "royalty": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Royalty OS metadata associated with the asset, content, concept, structure, or knowledge object.",
+      "required": [
+        "os_id",
+        "permission_scope",
+        "version",
+        "trace_priority"
+      ],
+      "properties": {
+        "os_id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 512,
+          "pattern": "^[A-Za-z0-9._:/#-]+$",
+          "description": "Unique Royalty OS content identifier."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "description": "Human-readable title of the content, article, asset, concept, or structure."
+        },
+        "author_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[A-Za-z0-9._:/#-]+$",
+          "description": "Identifier of the author, creator, publisher, or registered contributor."
+        },
+        "recipient_os_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[A-Za-z0-9._:/#-]+$",
+          "description": "Royalty OS identifier of the potential recipient, rights holder, publisher, creator, or registered entity."
+        },
+        "content_type": {
+          "type": "string",
+          "enum": [
+            "text",
+            "article",
+            "book",
+            "image",
+            "video",
+            "audio",
+            "dataset",
+            "code",
+            "concept",
+            "structure",
+            "mixed",
+            "other",
+            "unknown"
+          ],
+          "description": "Type of content or knowledge object associated with this metadata."
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "description": "Version of the content metadata or Royalty OS declaration."
+        },
+        "permission_scope": {
+          "type": "string",
+          "enum": [
+            "allow_reference",
+            "allow_summary",
+            "allow_quote",
+            "allow_training",
+            "allow_evaluation",
+            "allow_indexing",
+            "allow_rag",
+            "restricted",
+            "deny",
+            "unknown"
+          ],
+          "description": "Declared permission scope for AI systems, retrieval systems, indexing systems, or downstream usage."
+        },
+        "preferred_usage": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "direct_quote",
+              "factual_grounding",
+              "concept_reference",
+              "structural_influence",
+              "style_reference",
+              "summary",
+              "translation",
+              "paraphrase",
+              "training_signal",
+              "evaluation_reference",
+              "other"
+            ]
+          },
+          "uniqueItems": true,
+          "description": "Preferred or expected usage categories that may map to Royalty Trace Event usage types."
+        },
+        "attribution_request": {
+          "type": "string",
+          "enum": [
+            "cite_origin_when_possible",
+            "cite_required",
+            "link_required",
+            "visible_attribution_preferred",
+            "no_attribution_required",
+            "custom",
+            "unknown"
+          ],
+          "description": "Preferred attribution behavior requested by the creator, publisher, rights holder, or metadata issuer."
+        },
+        "trace_priority": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "description": "Suggested priority level for trace logging and review."
+        },
+        "license_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of the license, permission statement, or usage policy."
+        },
+        "policy_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of the Royalty OS policy, allocation policy, or rights policy associated with this content."
+        },
+        "related_repository": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "description": "Related repository, specification, or public source reference."
+        },
+        "jurisdiction": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 64,
+          "description": "Jurisdiction or region associated with the permission or metadata declaration, such as JP, EU, US, UK, global, or unknown."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when this Royalty OS metadata declaration was created."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when this Royalty OS metadata declaration was last updated."
+        }
+      }
+    },
+    "trace_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional trace-policy metadata that helps AI systems, RAG systems, or audit systems determine how to record usage.",
+      "properties": {
+        "trace_enabled": {
+          "type": "boolean",
+          "description": "Whether trace logging is requested or enabled for this content."
+        },
+        "trace_granularity": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "token",
+              "sentence",
+              "paragraph",
+              "section",
+              "document",
+              "concept",
+              "structure",
+              "dataset",
+              "unknown"
+            ]
+          },
+          "uniqueItems": true,
+          "description": "Preferred granularity levels for trace logging."
+        },
+        "outlier_origin_tracking": {
+          "type": "boolean",
+          "description": "Whether outlier origin detection is requested or relevant for this content."
+        },
+        "allocation_trigger_allowed": {
+          "type": "boolean",
+          "description": "Whether valid trace events may become allocation trigger candidates."
+        },
+        "review_required_before_allocation": {
+          "type": "boolean",
+          "description": "Whether human or multi-party review is required before allocation processing."
+        },
+        "privacy_mode": {
+          "type": "string",
+          "enum": [
+            "full",
+            "pseudonymous",
+            "hash_only",
+            "aggregated",
+            "redacted",
+            "unknown"
+          ],
+          "description": "Preferred privacy mode for trace events generated from this content."
+        },
+        "retention_hint": {
+          "type": "string",
+          "enum": [
+            "short_term",
+            "review_period",
+            "settlement_period",
+            "long_term_audit",
+            "unspecified"
+          ],
+          "description": "Non-binding retention hint for trace records related to this content."
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Evidence references that may support provenance, traceability, or later audit review.",
+      "properties": {
+        "content_hash": {
+          "$ref": "#/$defs/hash_string",
+          "description": "Hash of the content or asset associated with this Royalty OS metadata."
+        },
+        "metadata_hash": {
+          "$ref": "#/$defs/hash_string",
+          "description": "Hash of the Royalty OS metadata extension object."
+        },
+        "evidence_bundle_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of an external evidence bundle or audit package."
+        },
+        "evidence_bundle_hash": {
+          "$ref": "#/$defs/hash_string",
+          "description": "Hash of the evidence bundle."
+        },
+        "trace_receipt_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of a related trace receipt or trace receipt bundle."
+        },
+        "registration_record_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of a registry record, publication record, or source declaration."
+        }
+      }
+    },
+    "hash_string": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 512,
+      "pattern": "^(sha256:|sha384:|sha512:)?[A-Za-z0-9._:/+=-]+$"
+    }
+  }
+}
