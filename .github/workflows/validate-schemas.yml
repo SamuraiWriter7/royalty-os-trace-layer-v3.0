@@ -62,6 +62,13 @@ jobs:
                       Path("examples/allocation-trigger.example.json"),
                   ],
               },
+              {
+                  "name": "Royalty C2PA Extension v3.0",
+                  "schema": Path("schemas/royalty-c2pa-extension-v3.0.schema.json"),
+                  "examples": [
+                      Path("examples/royalty-c2pa-extension.example.json"),
+                  ],
+              },
           ]
 
           print("Validating Royalty OS Trace Layer v3.0 files...")
